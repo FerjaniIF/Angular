@@ -1,0 +1,42 @@
+<html>
+<table border="1">
+    <tr>
+        <th>id etudiant</th>
+        <th>nom etudiant</th>
+        <th>classe</th>
+        <th>action</th>
+    </tr>
+    <tr *ngFor="let row of etudData">
+        <td>{{row.id}}</td>
+        <td>{{row.nom}}</td>
+        <td>{{row.classe}}</td>
+        <td>
+            <button (click)="onEdit(row)">edit</button>
+            <button (click)="delEtud(row)">delete</button>
+        </td>
+    </tr>
+</table>
+
+<hr>
+
+<form [formGroup]="formVal">
+    <table>
+        <tr>
+            <td><label for="">ID</label></td>
+            <td><input type="text" formControlName="id"></td>
+        </tr>
+        <tr>
+            <td><label for="">Nom</label></td>
+            <td><input type="text" formControlName="nom"></td>
+        </tr>
+        <tr>
+            <td><label for="">classe</label></td>
+            <td><input type="text" formControlName="classe"></td>
+        </tr>
+        <br>
+        <tr>
+            <td><button (click)="postEtuds()">Add</button></td>
+        </tr>
+    </table>
+</form>
+</html>
