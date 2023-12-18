@@ -1,0 +1,74 @@
+<nav class="navbar navbar-light" style="background-color: rgb(173, 218, 219);">
+    <div class="container-fluid">
+        <h3>List of Employees</h3>
+        <div class="d-flex">
+            <button (click)="clickAddEmployee()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"  class="btn" style="background-color:rgb(75, 72, 72); border-color: rgb(75, 72, 72); color: white;" >Add Employee</button>
+        </div>
+    </div>
+</nav>
+<div class="row justify-content-center">
+        <table class="table table-bordered" style="width: 99%;">
+            <thead align="center" style="height: 60px;">
+                <th>ID</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Email</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of employeeData">
+                    <td align="center">{{ row.id }}</td>
+                    <td align="center">{{ row.name }}</td>
+                    <td align="center">{{ row.status }}</td>
+                    <td align="center">{{ row.email }}</td>
+                    <td align="center">
+                        <button (click)="onEdit(row)" class="btn btn-success" style="margin-right: 10px;" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+                        <button (click)="deleteEmployee(row)" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+<!-- ----------------------------------------------- form : Modal -------------------------------------------------------- -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">New Employee</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <form [formGroup]="formValue" > <!--reactive-->
+                    <div class="row">
+                        <div>
+                            <label for="">Name</label>
+                            <input type="text" class="form-control" formControlName="name">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div>
+                            <label for="">Status</label>
+                            <input type="text" class="form-control" formControlName="status">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div>
+                            <label for="">Email</label>
+                            <input type="text" class="form-control" formControlName="email">
+                        </div>
+                    </div>
+                    <br>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button *ngIf="showAdd" type="button" class="btn btn-primary" (click)="postEmployeesDetails()">Add</button>
+          <button *ngIf="showUpdate" type="button" class="btn btn-primary" (click)="updateEmployeesDetails()">Update</button>
+          <button type="button" id="cancel" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
